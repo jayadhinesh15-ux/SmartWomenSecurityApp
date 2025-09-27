@@ -4,7 +4,11 @@ workflows:
     environment:
       flutter: stable
     scripts:
-      - flutter pub get
-      - flutter build apk --release
+      - name: Navigate to Flutter project
+        script: cd mobile_app
+      - name: Install dependencies
+        script: flutter pub get
+      - name: Build APK
+        script: flutter build apk --release
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
+      - mobile_app/build/app/outputs/flutter-apk/app-release.apk
