@@ -1,2 +1,0 @@
-include ':app'
-rootProject.name = 'women_security_app'
