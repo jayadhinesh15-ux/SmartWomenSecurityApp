@@ -1,22 +1,17 @@
-name: smart_women_security
-description: A smart women safety Flutter app
-version: 1.0.0+1
+name: women_security_app
+description: A simple women security app
+
+publish_to: 'none'
 
 environment:
-  sdk: ">=3.2.0 <4.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: ^2.24.2
+  firebase_messaging: ^14.9.1
   http: ^1.1.0
-  geolocator: ^10.0.0
-  shake: ^2.0.1
-  firebase_core: ^2.10.0
-  firebase_messaging: ^14.5.0
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
 
 flutter:
   uses-material-design: true
