@@ -1,0 +1,19 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    compileSdkVersion 33
+
+    defaultConfig {
+        applicationId "com.example.women_security_app"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+    }
+}
+
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:33.2.0')
+}
