@@ -1,74 +1,75 @@
-import os
+# backend/app.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from pyfcm import FCMNotification
+import firebase_admin
+from firebase_admin import credentials, messaging
+import os
+import json
+import logging
 
-# ---------------- CONFIG ----------------
-SERVICE_ACCOUNT_PATH = "backend/serviceAccountKey.json"
-SERVICE_ACCOUNT_JSON = os.environ.get("SERVICE_ACCOUNT_JSON")  # content of JSON
+logging.basicConfig(level=logging.INFO)
 
-if SERVICE_ACCOUNT_JSON:
-    os.makedirs(os.path.dirname(SERVICE_ACCOUNT_PATH), exist_ok=True)
-    with open(SERVICE_ACCOUNT_PATH, "w") as f:
-        f.write(SERVICE_ACCOUNT_JSON)
-
-if not os.path.exists(SERVICE_ACCOUNT_PATH):
-    raise RuntimeError(
-        f"Service account file not found at {SERVICE_ACCOUNT_PATH} "
-        "or SERVICE_ACCOUNT_JSON env variable missing."
-    )
-
-# Initialize Flask and FCM
 app = Flask(__name__)
 CORS(app)
-push_service = FCMNotification(service_account_key=SERVICE_ACCOUNT_PATH)
 
-# In-memory storage
-registered_tokens = {}
-checkin_timers = {}
+# Load Firebase credentials from environment variable FIREBASE_CRED
+cred_json = os.environ.get("FIREBASE_CRED")
+if cred_json:
+    try:
+        cred_dict = json.loads(cred_json)
+        cred = credentials.Certificate(cred_dict)
+        firebase_admin.initialize_app(cred)
+        logging.info("Initialized Firebase Admin SDK")
+    except Exception as e:
+        logging.exception("Failed to initialize Firebase Admin SDK: %s", e)
+        raise
+else:
+    raise RuntimeError("FIREBASE_CRED not set in environment")
 
-# Routes
-@app.route("/register_contact", methods=["POST"])
+# Simple in-memory store for contact token (demo only)
+contact_token = None
+
+@app.route('/register_contact', methods=['POST'])
 def register_contact():
-    data = request.json
-    user_id = data.get("user_id")
-    token = data.get("contact_token")
-    if not user_id or not token:
-        return jsonify({"status": "error", "message": "Missing user_id or token"}), 400
-    registered_tokens.setdefault(user_id, [])
-    if token not in registered_tokens[user_id]:
-        registered_tokens[user_id].append(token)
-    return jsonify({"status": "ok", "tokens": registered_tokens[user_id]})
+    global contact_token
+    data = request.get_json() or {}
+    token = data.get('token')
+    if not token:
+        return jsonify({"error": "Missing token"}), 400
+    contact_token = token
+    logging.info("Registered contact token: %s", token[:20] + "...")
+    return jsonify({"status": "Contact registered"}), 200
 
-@app.route("/send_alert", methods=["POST"])
-def send_alert():
-    data = request.json
-    user_id = data.get("user_id")
-    latitude = data.get("latitude")
-    longitude = data.get("longitude")
-    if not user_id or latitude is None or longitude is None:
-        return jsonify({"status": "error", "message": "Missing data"}), 400
-    tokens = registered_tokens.get(user_id, [])
-    for token in tokens:
-        try:
-            push_service.notify_single_device(
-                registration_id=token,
-                message_title="SOS Alert",
-                message_body=f"{user_id} needs help! Location: {latitude},{longitude}"
-            )
-        except Exception as e:
-            print("FCM send error:", e)
-    return jsonify({"status": "ok", "sent_to": tokens})
+@app.route('/send_sos', methods=['POST'])
+def send_sos():
+    global contact_token
+    if not contact_token:
+        return jsonify({"error": "No contact registered"}), 400
+    data = request.get_json() or {}
+    message_body = data.get('message', 'Emergency! Please help!')
+    try:
+        message = messaging.Message(
+            notification=messaging.Notification(
+                title='SOS Alert',
+                body=message_body
+            ),
+            token=contact_token
+        )
+        response = messaging.send(message)
+        logging.info("Sent message: %s", response)
+        return jsonify({"status": "Alert sent", "response": response}), 200
+    except Exception as e:
+        logging.exception("Failed to send message: %s", e)
+        return jsonify({"error": "Failed to send message", "details": str(e)}), 500
 
-@app.route("/checkin_set", methods=["POST"])
-def checkin_set():
-    data = request.json
-    user_id = data.get("user_id")
-    checkin_time = data.get("checkin_time")
-    if not user_id or checkin_time is None:
-        return jsonify({"status": "error", "message": "Missing data"}), 400
-    checkin_timers[user_id] = checkin_time
-    return jsonify({"status": "ok", "message": f"Check-in timer set for {checkin_time} seconds"})
+@app.route('/status', methods=['GET'])
+def status():
+    return jsonify({"status": "ok", "contact_registered": contact_token is not None}), 200
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+@app.route('/')
+def home():
+    return "Backend running!", 200
+
+if __name__ == '__main__':
+    # For local development only. Render will use gunicorn.
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
