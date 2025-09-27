@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
 
 // ========= CONFIG - replace this AFTER you deploy backend =========
-const String backendUrl = "https://YOUR-RENDER-URL"; // e.g. https://women-security-backend.onrender.com
+const String backendUrl = "https://smartwomensecurityapp.onrender.com"; // e.g. https://women-security-backend.onrender.com
 // =================================================================
 
 // Top-level background handler required by firebase_messaging
