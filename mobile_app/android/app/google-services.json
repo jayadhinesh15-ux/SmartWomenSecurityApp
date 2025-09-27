@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "smartwomensecurityapp",
+  "private_key_id": "9341974ff02f7f8afa298d52a1ccb41e72b52a12",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC68Y4gE/AOK1gb\nPbmSuNCgL6lpGkpvplVB6wTANZUdJFjTTJHvBW7WOGAf3xWfDYyOOtC4hlEUtWCS\nWh694sk+bILC5v7z5y0NHGLtf8Uu3QKBtvcjsBXOvE9s2u5Lf0PLT1DuDyO7BBGh\ntuPgH3S4nOz5HJvumm/E/EHrJh2sXPMkguNB45gzU2dkSh2CCEP0E/WFHxMS+HM2\nlNJ+TKCdDWwO8rWP37nRD9WN9Slg06sqTDUf9oBJM63oeWuQuqLnIo8wqpSRfYOg\nTMCM/qphWx32kG41MCGS8OdAQvkTcSk4W1nnfXo+ewNkbuNTwNW9VVQZZhVUT3Tu\no7O7qp3DAgMBAAECggEAWM2+kgZmlpSIeghMSyJ4GGALvd27VmZRQcr+qr/JYdqO\nR3GsMTsHd8O4BevXPYMWLcpKtB06DvhKM7uTtugwaPLq+uL4YayDfiLp66AybxyV\nwEDGDbHr6hUSNceaQ0rlTYMUEsImWwSHy6YxgZnvvHLvLzcj66h5R739IlMs7V86\nWO6mcEqbzs2IUg7oY/YOQO7qeYFzQQ7dsB4u9iEndZosBQiZT6kEMwiGHRP0ps2F\nq7ev8JYFvVKHZjDgEr7k6qV58Y5kJ5BLY1sjlbqCpftTnLNTTaU/OqrPTDzKfQ3k\ncwW5g9zdkFkFcgJC7Mjzsk/zRBcuyJ3AyUhHPtDvoQKBgQDb/QtWsPHA2nIAnvm8\n074bxV5p5o6Z0N3hWYuqSwDPLz6//6HVXiVVRM+d18NLf5GfC0K+tT6jYaaqHc3E\nUoqgxN1lwcXlCkQ4ewGNGZbu+aG4+eqMbVfRYee2HBHXW+ssqrEGc5N/KmK6EHSi\nMmTtxouVh9rzKwXmvBeB5fk3xwKBgQDZi7bWvy65ThSwBmn7BTQiRSo4CW6FzWrv\njHvcFdLkrlx9bNszeaTqUe1R4XbC+/tCaoNt/oUGfFHvOmcvnfplllO6bhF4hDGr\n0Zhf8mJ/xH8x8B/x48x/bOp0WRT0HPW1f6sT/Z0y2ouPEUZLIytJmBglfOZiuvZk\ndxYTDhoCJQKBgCtRe68ZbrFkEnjO1Sx6oX/EcJ/313Kwb1CVmmvxEvq5OekCxHJI\ndJ+CykMxnnI6b4la5Uy6UdhIPVJYRhF3k3au7U3BR1+fkulwR1Dqjg8GtvK+u5Hl\nYhqH5eG1S0oV/owwHGXB0nSC+yfaX60ksT0lEI1kUBf8C9Bwj0xz5Yw3AoGAGk53\n1K4Xw1a6z7Jm3HD7pe1BNreFQu7dMIyHaczFzNt82bnxI99g3uj7Trx59QgtkRF6\nRTHS+j7MVaZ1Vd+/qMst4sxulmk97G4TA/82hAbJ7sr/wetvDjWogFtJWl+qIsGG\neYtgmAave6R2IJ3nHSYkPVxGK8g6BVoVNEavRHUCgYBXy85osTeS6gaxh0v4Dwym\ndRVQ+etNLKAuMp+2w27FSf1M12IpYuNSFk0THqf2TrnlPfhEdARw6y9qBZRQf6Cr\ni1T5pubBCxuBMc7ELIXtF8s8amFCsV4VFpYm/CNrBq4qkVyXiBzbItKKk4XztS8i\nhlXn+WqpvKLWBBErkGcGHA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fbsvc@smartwomensecurityapp.iam.gserviceaccount.com",
+  "client_id": "104758514591415055209",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40smartwomensecurityapp.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
