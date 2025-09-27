@@ -14,3 +14,4 @@ workflows:
           cd mobile_app && flutter build apk --release
     artifacts:
       - mobile_app/build/app/outputs/flutter-apk/app-release.apk
+
